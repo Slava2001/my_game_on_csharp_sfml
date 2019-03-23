@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F513B53-6883-4153-97DF-1E70C392F167}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Project2</RootNamespace>
+    <AssemblyName>Project2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Content.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="menu\Menu.cs" />
+    <Compile Include="menu\Button.cs" />
+    <Compile Include="menu\Textbox.cs" />
+    <Compile Include="player\Animator.cs" />
+    <Compile Include="player\Cursor.cs" />
+    <Compile Include="player\Inventory.cs" />
+    <Compile Include="world\Smarttile\CraftTabel.cs" />
+    <Compile Include="world\Item.cs" />
+    <Compile Include="player\Player.cs" />
+    <Compile Include="world\Chunk.cs" />
+    <Compile Include="world\structs\Tree.cs" />
+    <Compile Include="world\Tile.cs" />
+    <Compile Include="world\TileSettings.cs" />
+    <Compile Include="world\World.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="заметка.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="sfmlnet-audio-2">
+      <HintPath>D:\bibliateci\vs\sfml.net\lib\SFML.Net-2.3\x86\sfmlnet-audio-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-graphics-2">
+      <HintPath>D:\bibliateci\vs\sfml.net\lib\SFML.Net-2.3\x86\sfmlnet-graphics-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-system-2">
+      <HintPath>D:\bibliateci\vs\sfml.net\lib\SFML.Net-2.3\x86\sfmlnet-system-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-window-2">
+      <HintPath>D:\bibliateci\vs\sfml.net\lib\SFML.Net-2.3\x86\sfmlnet-window-2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
