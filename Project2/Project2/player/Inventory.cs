@@ -34,8 +34,8 @@ namespace Project2
 
         public Inventory()
         {
-            
-            
+
+          
 
             
             inventory_rectangle = new RectangleShape(new SFML.System.Vector2f(Tile.tile_size * inventory_ui_size, Tile.tile_size * inventory_ui_size));
@@ -55,7 +55,6 @@ namespace Project2
 
 
         }
-
         public bool add(TileType type, int CountInStack,int Count)
         {
             bool find = false;
@@ -275,6 +274,11 @@ namespace Project2
                 case TileType.FURNACE:
                     {
                         return get_rect(9, 0);
+
+                    }
+                case TileType.CHEAST:
+                    {
+                        return get_rect(10, 0);
 
                     }
             }

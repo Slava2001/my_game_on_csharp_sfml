@@ -21,8 +21,8 @@ namespace Project2
         IRON,
         DIAMONT,
         CRAFTTABEL,
-        FURNACE
-
+        FURNACE,
+        CHEAST
     }
 
     class Tile : Transformable, Drawable
@@ -45,6 +45,9 @@ namespace Project2
         SFML.System.Vector2i chunk_poz;
 
         public TileSettings.TileSettngsStruct settings;
+
+       public TileType[] inventar_types;
+       public int[] inventar_count;
 
         public Tile(TileType type, Random rnd, World world, SFML.System.Vector2i chunk_poz)
         {
@@ -145,6 +148,8 @@ namespace Project2
                         tile_rectangle.Texture = content.tile;
                         tile_rectangle.TextureRect = get_rect(3, 0, false);
                         settings = TileSettings.tilesettings[(int)TileType.CRAFTTABEL];
+                        inventar_types = new TileType[17];
+                        inventar_count = new int[17];
                         break;
                     }
                 case TileType.FURNACE:
@@ -152,6 +157,17 @@ namespace Project2
                         tile_rectangle.Texture = content.tile;
                         tile_rectangle.TextureRect = get_rect(3,1,false);
                         settings = TileSettings.tilesettings[(int)TileType.FURNACE];
+                        inventar_types = new TileType[3];
+                        inventar_count = new int[3];
+                        break;
+                    }
+                case TileType.CHEAST:
+                    {
+                        tile_rectangle.Texture = content.tile;
+                        tile_rectangle.TextureRect = get_rect(3, 4, false);
+                        settings = TileSettings.tilesettings[(int)TileType.CHEAST];
+                        inventar_types = new TileType[32];
+                        inventar_count = new int[32];
                         break;
                     }
                     /*case TileType.:
@@ -221,10 +237,17 @@ namespace Project2
 
 
             }
-
+            else if (type == TileType.FURNACE)
+            {
+             //   Furnace();
+             if(inventar_types[1]!=TileType.COAL)
+                    tile_rectangle.TextureRect = get_rect(3, 1, false);
+             else
+                    tile_rectangle.TextureRect = get_rect(3, 2, false);
+            }
         }
 
-
+      
  
 
         public void Draw(RenderTarget target, RenderStates states)

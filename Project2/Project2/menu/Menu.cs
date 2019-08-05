@@ -31,12 +31,14 @@ namespace Project2
 
 
 
-        string NowChangeWorld = "";
+        string NowChangeWorld = "name";
         string PlayerName = "Slava";
-        int seed = 1234567890;
+        int seed;
         string worldlist ="";
         string worldlistindirectory;
         TextReader datafileR;
+        int WorldListOffset = 0;
+
         public Menu()
         {
             
@@ -89,7 +91,7 @@ namespace Project2
 
                    bt = new Button(sizeX / 2 - 20 * 4, sizeY / 2 - 25, 20,8, "Player name", changeplayername);
             buttons_rec[2].Add(bt);
-                   bt = new Button(sizeX / 2 - 20 * 4, sizeY / 2, 20,8, "Settings 2", setiings);
+                   bt = new Button(sizeX / 2 - 20 * 4, sizeY / 2, 20,8, "Debag Mode", changedebagmode);
             buttons_rec[2].Add(bt);
                    bt = new Button(sizeX / 2 - 20 * 4, sizeY / 2 + 25, 20,8, "Back", gomain);
             buttons_rec[2].Add(bt);
@@ -115,7 +117,6 @@ namespace Project2
 
         void createWorldList()
         {
-            
 
 
             buttons_rec[1].Clear();
@@ -143,8 +144,13 @@ namespace Project2
 
             string buff = "";
             int line = 0;
-           
 
+
+            if (worldlistindirectory == null)
+            {
+                worldlist = "";
+            }
+            else
             for (int i = 0; i < worldlist.Length; i++)
             {
                 if (worldlist[i] == ';')
@@ -168,7 +174,8 @@ namespace Project2
             }
             if (buttons_rec[1].Count == butcount) return;
 
-            buttons_rec[1][butcount].Position = new SFML.System.Vector2f(sizeX / 2 - 20 * 4, sizeY / 2 - 25 * 5);
+              buttons_rec[1][butcount].Position = new SFML.System.Vector2f(sizeX / 2 - 20 * 4, sizeY / 2 - 25 * 5);
+           
 
             for (int i = butcount+1; i < buttons_rec[1].Count; i++)
             {
@@ -184,12 +191,22 @@ namespace Project2
                 if (menu_states == 1)
                 {
 
+                    
+                    
                     if (bt.NowChange)
                     {
                         NowChangeWorld = bt.buttunName;
                         find = true;
                     }
+                    for (int i = 0; i < 6; i++)
+                        buttons_rec[1][i].Udpate();
+                    int indezofset = (-WorldListOffset / 25);
+                    if (indezofset < 0) indezofset = 0;
+                    for (int i =  6+ indezofset; i < (16 + (-WorldListOffset / 25)) && i < buttons_rec[1].Count; i++)
+                        buttons_rec[1][i].Udpate();
+
                 }
+                else
                 bt.Udpate();
             }
             if (!find)
@@ -222,6 +239,18 @@ namespace Project2
 
         public void Draw()
         {
+            if (menu_states == 1)
+            {
+                for(int i=0;i<6;i++)
+                    Core.window.Draw(buttons_rec[1][i]);
+
+                int indezofset = (-WorldListOffset / 25);
+                if (indezofset < 0) indezofset = 0;
+                for (int i = 6 + indezofset; i < (16 + (-WorldListOffset / 25)) && i < buttons_rec[1].Count; i++)
+                Core.window.Draw(buttons_rec[1][i]);
+
+            }
+            else
             foreach (Button bt in buttons_rec[menu_states])
                 Core.window.Draw(bt);
            if(menu_states==3)
@@ -396,7 +425,11 @@ namespace Project2
         {
             menu_states = 1;
         }
- public void saveworldlistdata()     
+        void changedebagmode()
+        {
+            Debug.DebugMode = !Debug.DebugMode;
+        }
+        public void saveworldlistdata()     
         {
             TextWriter datafileW = new StreamWriter("world_list_data.txt");
             //datafileW.Write('#');
@@ -404,6 +437,28 @@ namespace Project2
             datafileW.WriteLine(worldlist);
             
             datafileW.Close();
+        }
+        public void win_scroll(object sender, EventArgs e)
+        {
+            SFML.Window.MouseWheelScrollEventArgs mouseEvent = (SFML.Window.MouseWheelScrollEventArgs)e;
+
+            WorldListOffset -= (int)mouseEvent.Delta;
+
+
+
+            float sizeX = Core.menu_view.Size.X * (Core.game_view.Size.X / Core.menu_view.Size.X);
+            float sizeY = Core.menu_view.Size.Y * (Core.game_view.Size.Y / Core.menu_view.Size.Y);
+            int butcount = buttons_rec[1].Count-1;
+
+
+            for(int i=6;i<buttons_rec[1].Count;i++)
+            buttons_rec[1][i].Position = new SFML.System.Vector2f(sizeX / 2 - 20 * 4, sizeY / 2 - 25 * 5+WorldListOffset+25*(i-6));
+
+
+
+
+
+            // mouseEvent.Delta
         }
     }
 }

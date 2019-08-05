@@ -9,7 +9,7 @@ namespace Project2
 {
     class Chunk: Transformable, Drawable
     {
-        public const int chunk_size = 5;
+        public const int chunk_size = 16;
 
         Tile[][] Tiles;
 
@@ -66,19 +66,58 @@ namespace Project2
         {
             string chunck="(";
 
-            for (int y = 0; y < chunk_size; y++)
+                for (int y = 0; y < chunk_size; y++)
                 for (int x = 0; x < chunk_size; x++)
+                {
                     chunck += ((char)Tiles[y][x].type).ToString();
-            return chunck+")";
+                    if ((Tiles[y][x].type==TileType.CHEAST)|| (Tiles[y][x].type == TileType.FURNACE))
+                    {
+                        chunck += "{";
+                        for (int i = 0; i < Tiles[y][x].inventar_types.Length; i++)
+                        {
+                            chunck += ((char)Tiles[y][x].inventar_types[i]).ToString();
+                            chunck += ((char)Tiles[y][x].inventar_count[i]).ToString();
+                        }
+                        chunck += "}";
+                    }
+
+                }
+           return chunck+")";
         }
 
         public void Load(string chunk)
         {
-            for (int i = 0; i < chunk_size * chunk_size; i++)
+            int strind = 1;
+            for (int i = 0; i < chunk_size * chunk_size; i++, strind++)
             {
-                SetTile((TileType)chunk[i+1], (i) / chunk_size, (i) % chunk_size);
+                SetTile((TileType)chunk[strind], (i) / chunk_size, (i) % chunk_size);
+
+                if ((Tiles[(i) / chunk_size][(i) % chunk_size].type == TileType.CHEAST)|| (Tiles[(i) / chunk_size][(i) % chunk_size].type == TileType.FURNACE))
+                {
+                   
+                    strind++;
+                    strind++;
+                    String str = "";
+                    for (;chunk[strind]!='}';strind++)
+                    {
+                        str += chunk[strind];
+                    }
+                    load_tile_inventory(str,i);
+                }
+            }
+
+            
+        }
+        void load_tile_inventory(string str,int i)
+        {
+            for (int t = 0; t < str.Length; t += 2)
+            {
+
+                Tiles[(i) / chunk_size][(i) % chunk_size].inventar_types[t / 2] = (TileType)str[t];
+                Tiles[(i) / chunk_size][(i) % chunk_size].inventar_count[t / 2] = (int)str[t + 1];
             }
         }
+    
 
         public void Draw(RenderTarget target, RenderStates states)
         {

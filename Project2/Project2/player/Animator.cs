@@ -110,5 +110,19 @@ namespace Project2
 
             return lastrec;
         }
+        public IntRect GetFrame(int dir)
+        {
+            switch (dir)
+            {
+                case 1:
+                    return new IntRect(0, 0, w, h);
+                    
+                case -1:
+                    return new IntRect(w, 0, -w, h);
+                    
+
+            }
+            return new IntRect(0,0,0,0);
+        }
     }
 }

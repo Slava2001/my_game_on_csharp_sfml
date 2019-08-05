@@ -12,6 +12,8 @@ namespace Project2
 {
     class Player: Transformable,Drawable
     {
+        public int gamemode = 1;
+
         public int player_y = 44;
         public int player_x = 16;
 
@@ -72,64 +74,107 @@ namespace Project2
 
         void physic_update()
         {
-           
+
+            float deltatime = Core.deltatime < 2 ? Core.deltatime : 2;
+
+            if (gamemode == 0)
+            {
 
 
-            float deltatime = Core.deltatime<2? Core.deltatime:2;
-
-
-               if (player_onGround&&Keyboard.IsKeyPressed(Keyboard.Key.W))
-               {
-                   player_onGround = false;
-                   player_spd.Y -= player_spd_jmp;
-
-               }
-               else 
-               {
-                   player_spd.Y += player_acl.Y*deltatime;
-                if(!player_onGround)
-                player_rec.TextureRect = anim.Update(2);
-              }
-            Debug.Add(0, 10, "onGround " + player_onGround.ToString());
-
-               if (Keyboard.IsKeyPressed(Keyboard.Key.A) )
-               {
-                if(player_spd.X > -player_max_spd)
-                   player_spd.X -= player_acl.X * deltatime;
-                
-                    player_rec.TextureRect = anim.Update(1);
-               }
-               else if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-               {
-                if(player_spd.X < player_max_spd)
-                   player_spd.X += player_acl.X * deltatime;
-              
-                   player_rec.TextureRect = anim.Update(-1);
-               }
-               else
-               {
-                if (player_spd.X > 0.1)
+                if (player_onGround && Keyboard.IsKeyPressed(Keyboard.Key.W))
                 {
-                    player_spd.X -= player_acl.X * deltatime;
-                }
-                else if (player_spd.X < -0.1)
-                {
-                    player_spd.X += player_acl.X * deltatime;
+                    player_onGround = false;
+                    player_spd.Y -= player_spd_jmp;
+
                 }
                 else
                 {
-                    player_spd.X = 0;
+                    player_spd.Y += player_acl.Y * deltatime;
+                    if (!player_onGround)
+                        player_rec.TextureRect = anim.Update(2);
                 }
-                player_rec.TextureRect = anim.Update(0);
+                Debug.Add(0, 10, "onGround " + player_onGround.ToString());
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                {
+                    if (player_spd.X > -player_max_spd)
+                        player_spd.X -= player_acl.X * deltatime;
+
+                    player_rec.TextureRect = anim.Update(1);
+                }
+                else if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                {
+                    if (player_spd.X < player_max_spd)
+                        player_spd.X += player_acl.X * deltatime;
+
+                    player_rec.TextureRect = anim.Update(-1);
+                }
+                else
+                {
+                    if (player_spd.X > 0.1)
+                    {
+                        player_spd.X -= player_acl.X * deltatime;
+                    }
+                    else if (player_spd.X < -0.1)
+                    {
+                        player_spd.X += player_acl.X * deltatime;
+                    }
+                    else
+                    {
+                        player_spd.X = 0;
+                    }
+                    player_rec.TextureRect = anim.Update(0);
+                }
+
+
+                player_poz.Y += player_spd.Y * deltatime;
+                player_onGround = false;
+                Collision(1);
+                player_poz.X += player_spd.X * deltatime;
+                Collision(0);
+
             }
+            else if (gamemode == 1)
+            {
 
 
-            player_poz.Y += player_spd.Y * deltatime;
-            Collision(1);
-            player_poz.X += player_spd.X * deltatime;
-            Collision(0);
-         
-           
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+                {
+                    if (player_spd.Y > -player_max_spd)
+                        player_spd.Y -= player_acl.X * deltatime;
+                }
+                else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+                {
+                    if (player_spd.Y < player_max_spd)
+                        player_spd.Y += player_acl.X * deltatime;
+                }
+                else
+                {
+                    player_spd.Y = 0;
+                }
+              
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                {
+                    if (player_spd.X > -player_max_spd)
+                        player_spd.X -= player_acl.X * deltatime;
+                    player_rec.TextureRect = anim.GetFrame(1); 
+                }
+                else if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                {
+                    if (player_spd.X < player_max_spd)
+                        player_spd.X += player_acl.X * deltatime;
+                    player_rec.TextureRect = anim.GetFrame(-1);
+                }
+                else
+                {                 
+                        player_spd.X = 0;
+                }
+
+
+                player_poz.Y += player_spd.Y * deltatime;
+                player_poz.X += player_spd.X * deltatime;
+               
+            }
 
             player_rec.Position = player_poz;
             Core.game_view.Center = player_poz+ new Vector2f(player_x/2,player_y/2);
@@ -157,6 +202,7 @@ namespace Project2
                         }
                         else          //collision Y
                         {
+     
                             if (player_spd.Y > 0)
                             {
                                 player_poz.Y = (y * Tile.tile_size) - player_y;
@@ -210,7 +256,7 @@ namespace Project2
 
         public void Load()
         {
-            string playerDt = datafileR.ReadLine();
+            string playerDt = datafileR.ReadToEnd();
             datafileR.Close();
 
             string buffer="";
