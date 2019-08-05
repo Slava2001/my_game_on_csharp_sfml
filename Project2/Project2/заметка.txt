@@ -28,14 +28,17 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 	игровое меню
 			кнопки
 	генератор мира
-			динамическая генерация мира(оптимизачия)
-сундук
-печь
-верстак
-ресурсы
+			динамическая генерация мира(оптимизация)
+		сундук
+		печь
+		верстак
+	ресурсы
 		сохранение
 		загрузка
 биомы
+///
+добавить инструменты
+добавить систему крафта
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
   
@@ -46,7 +49,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
 быстрое сохранение(хранение строки чанка,а не сборка её во время сохранения)
 пересовка текстур иконок, чтобы координаты иконки соответсвовали номеру типа тайла (Inventory.cs)
-
+в меню 
 ))))))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 
 
@@ -60,6 +63,8 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 		ошибка создания мира, не распознает регистр, при создании мира с именим отличающимся от сущетвующего только регистром создает игру с сушесвующим миром
 		пропадают блоки если нажать ПКМ и ЛКМ одновременно
 		криво работает зум в мини меню
+		прыжок после падения_OK
+
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 
 
@@ -81,4 +86,8 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 09_jan (09:00-16:00)=								07:00
 13_jan (22:00-23:00)=								01:00
 01_feb (08:30-09:30)+(10:00-12)=					03:00
+13_apr (5:00-7:00)=									02:00
+14_apr (11:30-12:50)+(14:30-15:10)=					02:00						
+29_apr (04:00-10:00)+(20:00-21:00)=					07:00
+20_may (17:00-19:00)=								02:00/69
 #########################################################

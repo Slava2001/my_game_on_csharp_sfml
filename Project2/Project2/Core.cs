@@ -43,14 +43,15 @@ namespace Project2
             window.Resized += win_rezize;
             window.MouseWheelScrolled +=Cursor.win_scroll;
            
+            
 
 
-            content.load();//ВАЖНОООО
+             content.load();//ВАЖНОООО
             TileSettings.load();
 
-           
-            menu = new Menu();
 
+             menu = new Menu();
+            window.MouseWheelScrolled += menu.win_scroll;
 
             Clock clk = new Clock();
             while (window.IsOpen)
@@ -60,11 +61,11 @@ namespace Project2
                 window.DispatchEvents();
 
                 if (gameIsReady)
-                    game.Update();
+                  game.Update();
                 else
-                    menu.Update();
+                  menu.Update();
 
-                window.Clear(Color.Black);
+                    window.Clear(Color.Black);
                 window.SetView(game_view);
                 ///draw////
                 if (gameIsReady)

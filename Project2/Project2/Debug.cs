@@ -10,7 +10,7 @@ namespace Project2
     class Debug
     {
 
-        public static bool DebugMode = true; 
+        public static bool DebugMode = false; 
      
 
         static List<Drawable> draw_rec = new List<Drawable>();

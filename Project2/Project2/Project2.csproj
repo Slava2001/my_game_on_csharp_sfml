@@ -49,7 +49,9 @@
     <Compile Include="player\Animator.cs" />
     <Compile Include="player\Cursor.cs" />
     <Compile Include="player\Inventory.cs" />
-    <Compile Include="world\Smarttile\CraftTabel.cs" />
+    <Compile Include="player\smart_tile_ui\CheastInventory.cs" />
+    <Compile Include="player\smart_tile_ui\CraftTableInventory.cs" />
+    <Compile Include="player\smart_tile_ui\FurnanceInventory.cs" />
     <Compile Include="world\Item.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="world\Chunk.cs" />
@@ -75,5 +77,6 @@
       <HintPath>D:\bibliateci\vs\sfml.net\lib\SFML.Net-2.3\x86\sfmlnet-window-2.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

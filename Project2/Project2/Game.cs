@@ -14,7 +14,7 @@ namespace Project2
         Player player;
 
         bool isprst = false;
-        bool domenuopen = false;
+        public static bool domenuopen = false;
 
         List<Button> minimenu = new List<Button>();
 
@@ -62,7 +62,7 @@ namespace Project2
 
 
         }
-        void WaitingScreen()
+       void WaitingScreen()
         {
             var rec = new SFML.Graphics.RectangleShape(new SFML.System.Vector2f(Core.game_view.Size.X, Core.game_view.Size.Y) * 2);
             rec.Position = Core.game_view.Center - Core.game_view.Size;
